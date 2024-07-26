@@ -1,4 +1,4 @@
-import styled from '@emotion/styled';
+import styled from "@emotion/styled";
 
 export const FavoriteButton = styled.button`
   position: absolute;
@@ -24,11 +24,6 @@ export const FavoriteButton = styled.button`
 export const FavoriteIcon = styled.span`
   width: 24px;
   height: 24px;
-
-  // svg {
-  //   width: 24px;
-  //   height: 24px;
-  // }
 `;
 export const FavoriteSvg = styled.svg`
   width: 24px;

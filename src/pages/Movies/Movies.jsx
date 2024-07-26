@@ -1,30 +1,25 @@
-import { useCallback, useEffect, useState } from 'react';
-import { useSearchParams } from 'react-router-dom';
-import { getMovieByQuery } from 'services/getMovies';
+import { useCallback, useEffect, useState } from "react";
+import { useSearchParams } from "react-router-dom";
+import { getMovieByQuery } from "services/getMovies";
 
-import { useError } from '../../contexts/ErrorContext';
+import { useError } from "../../contexts/ErrorContext";
 
-import { MovieList } from 'components/MovieList/MovieList';
-import { PageNavButtonsWrapper } from 'components/Buttons/PageNavButtons/PageNavButtonsWrapper';
-import { Form } from './MoviesForm/MoviesForm';
-
+import { MovieList } from "components/MovieList/MovieList";
+import { PageNavButtonsWrapper } from "components/Buttons/PageNavButtons/PageNavButtonsWrapper";
+import { Form } from "./MoviesForm/MoviesForm";
 const Movies = () => {
   const [movies, setMovies] = useState([]);
   const [totalPagesState, setTotalPagesState] = useState(0);
 
   const [searchParams, setSearchParams] = useSearchParams();
   const { handleMinorError, handleWarning } = useError();
+  const currentPage = searchParams.get("page") || "1";
 
   useEffect(() => {
-    const currentQuery = searchParams.get('query');
-    const currentPage = searchParams.get('page') || '1';
+    const currentQuery = searchParams.get("query");
 
     if (!currentQuery) {
       return;
-    }
-
-    if (!searchParams.has('page')) {
-      setSearchParams({ query: currentQuery, page: currentPage });
     }
 
     const fetchMovieByQuery = async () => {
@@ -35,22 +30,22 @@ const Movies = () => {
         );
         const { results, total_pages, total_results } = moviesByQueryResponse;
         if (total_results === 0) {
-          handleWarning('Фильм не найден, пожалуйста введите другое название');
+          handleWarning("Фильм не найден, пожалуйста введите другое название");
           return;
         }
         setTotalPagesState(total_pages);
         setMovies(results);
       } catch (error) {
-        handleMinorError('Failed to fetch movies. Please try again.');
+        handleMinorError("Failed to fetch movies. Please try again.");
       }
     };
 
     fetchMovieByQuery();
-  }, [searchParams, setSearchParams, handleWarning, handleMinorError]);
+  }, [searchParams]);
 
   const handlePageChange = useCallback(
-    newPage => {
-      setSearchParams(prevParams => ({
+    (newPage) => {
+      setSearchParams((prevParams) => ({
         ...Object.fromEntries(prevParams),
         page: newPage.toString(),
       }));
@@ -65,7 +60,7 @@ const Movies = () => {
       {movies.length > 0 && (
         <PageNavButtonsWrapper
           movies={movies}
-          page={Number(searchParams.get('page')) || 1}
+          page={Number(searchParams.get("page")) || 1}
           totalPages={totalPagesState}
           handlePageChange={handlePageChange}
         />
@@ -75,9 +70,3 @@ const Movies = () => {
 };
 
 export default Movies;
-
-///
-///
-///
-///
-///

@@ -2,11 +2,11 @@ import {
   FavoriteButton,
   FavoriteIcon,
   FavoriteSvg,
-} from './ButtonAddToFavorite.styled';
-import { useEffect, useState } from 'react';
+} from "./ButtonAddToFavorite.styled";
+import { useEffect, useState } from "react";
+import { useFavoriteActions } from "store/favorites/favoritesActionHooks";
 
-import { useFavoriteActions } from 'store/favorites/favorites.actions.hooks/favorites.actions.hooks';
-import { useIsFavorite } from 'store/favorites/favorites.selectors/favoritesSelectors';
+import { useIsFavorite } from "store/favorites/favoritesSelectors";
 
 export const ButtonAddToFavorite = ({ id }) => {
   const { addFavoriteHook, removeFavoriteHook } = useFavoriteActions();
@@ -17,7 +17,7 @@ export const ButtonAddToFavorite = ({ id }) => {
     setIsFav(isFavoriteMovie);
   }, [isFavoriteMovie]);
 
-  const handleFavoriteClick = e => {
+  const handleFavoriteClick = (e) => {
     e.stopPropagation();
     e.preventDefault();
     if (isFav) {
@@ -31,7 +31,7 @@ export const ButtonAddToFavorite = ({ id }) => {
   return (
     <FavoriteButton
       onClick={handleFavoriteClick}
-      className={isFav ? 'favorite' : ''}
+      className={isFav ? "favorite" : ""}
     >
       <FavoriteIcon>
         <FavoriteSvg viewBox="0 0 32 32">
@@ -44,7 +44,3 @@ export const ButtonAddToFavorite = ({ id }) => {
     </FavoriteButton>
   );
 };
-
-////
-///
-///

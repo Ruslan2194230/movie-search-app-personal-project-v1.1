@@ -1,13 +1,13 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React from "react";
+import { Link } from "react-router-dom";
 import {
   MovieItemLi,
   MovieListimg,
   MovieTitle,
   MovieImgContainer,
-} from './MovieItem.styled';
-import { BASE_POSTER_URL, PLACEHOLDER } from 'utils/constants';
-import { ButtonAddToFavorite } from 'components/Buttons/ButtonAddToFavorite/ButtonAddToFavorite';
+} from "./MovieItem.styled";
+import { BASE_POSTER_URL, PLACEHOLDER } from "utils/constants";
+import { ButtonAddToFavorite } from "components/Buttons/ButtonAddToFavorite/ButtonAddToFavorite";
 
 export const MovieItem = ({ movie, location }) => {
   const { id, original_title, poster_path } = movie;
@@ -20,7 +20,7 @@ export const MovieItem = ({ movie, location }) => {
             src={
               poster_path
                 ? BASE_POSTER_URL + poster_path
-                : PLACEHOLDER + '?text=' + original_title
+                : PLACEHOLDER + "?text=" + original_title
             }
             alt={original_title}
           />
@@ -31,5 +31,3 @@ export const MovieItem = ({ movie, location }) => {
     </MovieItemLi>
   );
 };
-
-// export default MovieItem;

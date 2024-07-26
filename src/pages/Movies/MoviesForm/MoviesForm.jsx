@@ -1,10 +1,10 @@
-import { useState } from 'react';
-import { InputSearch, ButtonSearch } from './MoviesForm.styled';
+import { useState } from "react";
+import { InputSearch, ButtonSearch } from "./MoviesForm.styled";
 
 export const Form = ({ setSearchParams }) => {
-  const [query, setQuery] = useState('');
+  const [query, setQuery] = useState("");
 
-  const handleSubmit = e => {
+  const handleSubmit = (e) => {
     e.preventDefault();
 
     setSearchParams({ query });
@@ -29,5 +29,3 @@ export const Form = ({ setSearchParams }) => {
     </form>
   );
 };
-
-// export default Form;

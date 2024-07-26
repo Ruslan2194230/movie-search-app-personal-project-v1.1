@@ -1,19 +1,17 @@
-import { useEffect, useState } from 'react';
-import { useLocation, useParams } from 'react-router-dom';
-import { getMovieById } from 'services/getMovies';
+import { useEffect, useState } from "react";
+import { useLocation, useParams } from "react-router-dom";
+import { getMovieById } from "services/getMovies";
 
-// import { AdditionalInfo } from './MovieDetailsAdditionalInfo/MovieDetailsAdditionalInfoContainer';
-// import { GoBackLink } from './MovieDetailsGoBackLink/MovieDetailsGoBackLink';
-import { MovieDetailsCard } from './MovieDetailsCard/MovieDetailsCard';
-import { AdditionalInfo } from './MovieDetailsAdditionalInfo/MovieDetailsAdditionalInfoContainer';
-import { GoBackLink } from './MovieDetailsGoBackLink/MovieDetailsGoBackLink';
+import { MovieDetailsCard } from "./MovieDetailsCard/MovieDetailsCard";
+import { AdditionalInfo } from "./MovieDetailsAdditionalInfo/MovieDetailsAdditionalInfo";
+import { GoBackLink } from "./MovieDetailsGoBackLink/MovieDetailsGoBackLink";
 
 const MovieDetails = () => {
   const { movieId } = useParams();
-  const [movie, setMovie] = useState('');
+  const [movie, setMovie] = useState("");
   const location = useLocation();
 
-  const backLinkHref = location.state?.from ?? '/movies';
+  const backLinkHref = location.state?.from ?? "/movies";
 
   useEffect(() => {
     const fetchMovieById = async () => {
@@ -38,9 +36,3 @@ const MovieDetails = () => {
 };
 
 export default MovieDetails;
-
-///
-///
-///
-///
-///

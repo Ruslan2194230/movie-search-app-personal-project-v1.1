@@ -1,4 +1,4 @@
-import styled from '@emotion/styled';
+import styled from "@emotion/styled";
 
 export const MovieListUl = styled.ul`
   display: grid;
@@ -13,11 +13,6 @@ export const MovieListUl = styled.ul`
     /* Показывать по 4 фильма в строку на компах */
     grid-template-columns: repeat(4, 1fr);
   }
-
-  // @media (max-width: 992px) {
-  //   /* Показывать по 2 фильма в строку на мобильных устройствах */
-  //   grid-template-columns: repeat(2, 1fr);
-  // }
 
   @media (max-width: 1000px) {
     /* Показывать по 2 фильма в строку на планшетах */

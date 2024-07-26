@@ -1,5 +1,5 @@
-import { configureStore } from '@reduxjs/toolkit';
-import { favoriteReducer } from '../store/favorites/favorites.slices/favoritesSlice';
+import { configureStore } from "@reduxjs/toolkit";
+import { favoriteReducer } from "./favorites/favoritesSlice";
 import {
   persistStore,
   FLUSH,
@@ -8,13 +8,13 @@ import {
   PERSIST,
   PURGE,
   REGISTER,
-} from 'redux-persist';
+} from "redux-persist";
 
 export const store = configureStore({
   reducer: {
     favoritesStoreReducer: favoriteReducer,
   },
-  middleware: getDefaultMiddleware =>
+  middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: {
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],

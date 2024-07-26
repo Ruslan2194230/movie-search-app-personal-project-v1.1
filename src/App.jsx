@@ -1,18 +1,17 @@
-import { Suspense, lazy } from 'react';
-import { Route, Routes } from 'react-router-dom';
-import { SharedLayout } from './components/SharedLayout/SharedLayout';
-// import { FavoriteProvider } from './Contexts/FavoriteContext';
-import { Loader } from 'components/Loader/Loader';
-import { ErrorProvider } from 'contexts/ErrorContext';
-import { Provider } from 'react-redux';
-import { persistor, store } from 'store/store';
-import { PersistGate } from 'redux-persist/integration/react';
+import { Suspense, lazy } from "react";
+import { Route, Routes } from "react-router-dom";
+import { SharedLayout } from "./components/SharedLayout/SharedLayout";
+import { Loader } from "components/Loader/Loader";
+import { ErrorProvider } from "contexts/ErrorContext";
+import { Provider } from "react-redux";
+import { persistor, store } from "store/store";
+import { PersistGate } from "redux-persist/integration/react";
 
-const Home = lazy(() => import('./pages/Home/Home'));
-const MovieDetails = lazy(() => import('./pages/MovieDetails/MovieDetails'));
-const Movies = lazy(() => import('./pages/Movies/Movies'));
+const Home = lazy(() => import("./pages/Home/Home"));
+const MovieDetails = lazy(() => import("./pages/MovieDetails/MovieDetails"));
+const Movies = lazy(() => import("./pages/Movies/Movies"));
 
-const Favorites = lazy(() => import('./pages/Favorites/Favorites'));
+const Favorites = lazy(() => import("./pages/Favorites/Favorites"));
 
 export const App = () => (
   <ErrorProvider>
@@ -32,7 +31,3 @@ export const App = () => (
     </Provider>
   </ErrorProvider>
 );
-
-///
-///
-///

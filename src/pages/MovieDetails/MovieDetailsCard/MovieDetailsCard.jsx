@@ -1,11 +1,11 @@
-import { FilmImage } from '../MovieDetailsImage/MovieDetailsImage';
+import { FilmImage } from "../MovieDetailsImage/MovieDetailsImage";
 import {
   FilmWrapper,
   FilmTitle,
   FilmDescr,
   FilmSubTitle,
   StyledListDescr,
-} from './MovieDetailsCard.module';
+} from "./MovieDetailsCard.module";
 
 export const MovieDetailsCard = ({ movie }) => {
   return (
@@ -19,7 +19,7 @@ export const MovieDetailsCard = ({ movie }) => {
         <FilmDescr>{movie.overview}</FilmDescr>
         <FilmSubTitle>Genres</FilmSubTitle>
         <StyledListDescr>
-          {movie.genres?.map(genre => (
+          {movie.genres?.map((genre) => (
             <li key={genre.id}>{genre.name}</li>
           ))}
         </StyledListDescr>
@@ -27,9 +27,3 @@ export const MovieDetailsCard = ({ movie }) => {
     </FilmWrapper>
   );
 };
-
-///
-///
-///
-///
-///

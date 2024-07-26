@@ -1,4 +1,4 @@
-import { Circles } from 'react-loader-spinner';
+import { Circles } from "react-loader-spinner";
 
 export const Loader = () => (
   <Circles
@@ -11,9 +11,3 @@ export const Loader = () => (
     visible={true}
   />
 );
-
-///
-///
-///
-///
-///
