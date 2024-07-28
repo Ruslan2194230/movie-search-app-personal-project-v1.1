@@ -1,34 +1,22 @@
-import { useEffect, useState } from "react";
+// import { useEffect, useState } from "react";
 import { useLocation, useParams } from "react-router-dom";
-import { getMovieById } from "services/getMovies";
 
 import { MovieDetailsCard } from "./MovieDetailsCard/MovieDetailsCard";
 import { AdditionalInfo } from "./MovieDetailsAdditionalInfo/MovieDetailsAdditionalInfo";
 import { GoBackLink } from "./MovieDetailsGoBackLink/MovieDetailsGoBackLink";
+import { useGetMovieByIdQuery } from "store/movies/getMoviesRTK";
 
 const MovieDetails = () => {
   const { movieId } = useParams();
-  const [movie, setMovie] = useState("");
   const location = useLocation();
 
   const backLinkHref = location.state?.from ?? "/movies";
-
-  useEffect(() => {
-    const fetchMovieById = async () => {
-      try {
-        const movieById = await getMovieById(movieId);
-        setMovie(movieById);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    fetchMovieById();
-  }, [movieId]);
+  const { data } = useGetMovieByIdQuery(movieId);
 
   return (
     <>
       <GoBackLink backLinkHref={backLinkHref} />
-      <MovieDetailsCard movie={movie}></MovieDetailsCard>
+      {data && <MovieDetailsCard movie={data}></MovieDetailsCard>}
 
       <AdditionalInfo></AdditionalInfo>
     </>

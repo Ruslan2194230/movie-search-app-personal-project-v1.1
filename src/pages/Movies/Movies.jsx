@@ -1,47 +1,34 @@
-import { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
-import { getMovieByQuery } from "services/getMovies";
-
 import { useError } from "../../contexts/ErrorContext";
-
 import { MovieList } from "components/MovieList/MovieList";
 import { PageNavButtonsWrapper } from "components/Buttons/PageNavButtons/PageNavButtonsWrapper";
 import { Form } from "./MoviesForm/MoviesForm";
-const Movies = () => {
-  const [movies, setMovies] = useState([]);
-  const [totalPagesState, setTotalPagesState] = useState(0);
+import { useGetMovieByQueryQuery } from "store/movies/getMoviesRTK";
+import { Loader } from "components/Loader/Loader";
 
+const Movies = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const { handleMinorError, handleWarning } = useError();
   const currentPage = searchParams.get("page") || "1";
+  const currentQuery = searchParams.get("query");
+
+  const { data, error, isFetching } = useGetMovieByQueryQuery(
+    { query: currentQuery, page: currentPage },
+    { skip: !currentQuery }
+  );
+
+  const results = data?.results ?? [];
+  const total_pages = data?.total_pages ?? 0;
+  const total_results = data?.total_results ?? 0;
 
   useEffect(() => {
-    const currentQuery = searchParams.get("query");
-
-    if (!currentQuery) {
-      return;
+    if (error) {
+      handleMinorError("Failed to fetch movies. Please try again.");
+    } else if (currentQuery && total_results === 0) {
+      handleWarning("Фильм не найден, пожалуйста введите другое название");
     }
-
-    const fetchMovieByQuery = async () => {
-      try {
-        const moviesByQueryResponse = await getMovieByQuery(
-          currentQuery,
-          currentPage
-        );
-        const { results, total_pages, total_results } = moviesByQueryResponse;
-        if (total_results === 0) {
-          handleWarning("Фильм не найден, пожалуйста введите другое название");
-          return;
-        }
-        setTotalPagesState(total_pages);
-        setMovies(results);
-      } catch (error) {
-        handleMinorError("Failed to fetch movies. Please try again.");
-      }
-    };
-
-    fetchMovieByQuery();
-  }, [searchParams]);
+  }, [error, currentQuery, total_results, handleMinorError, handleWarning]);
 
   const handlePageChange = useCallback(
     (newPage) => {
@@ -56,12 +43,13 @@ const Movies = () => {
   return (
     <>
       <Form setSearchParams={setSearchParams} />
-      {movies.length > 0 && <MovieList movies={movies} />}
-      {movies.length > 0 && (
+      {isFetching && <Loader />}
+      {results.length > 0 && <MovieList movies={results} />}
+      {results.length > 0 && (
         <PageNavButtonsWrapper
-          movies={movies}
-          page={Number(searchParams.get("page")) || 1}
-          totalPages={totalPagesState}
+          movies={results}
+          page={Number(currentPage) || 1}
+          totalPages={total_pages}
           handlePageChange={handlePageChange}
         />
       )}
