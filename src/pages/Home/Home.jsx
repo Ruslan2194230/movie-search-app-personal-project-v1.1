@@ -1,19 +1,15 @@
-import { useEffect, useState } from 'react';
-
-import { getTrendingMovies } from 'services/getMovies';
-
-import { MovieList } from 'components/MovieList/MovieList';
+import { Loader } from "components/Loader/Loader";
+import { MovieList } from "components/MovieList/MovieList";
+import { useGetTrendingMoviesQuery } from "store/movies/getMoviesRTK";
 
 const Home = () => {
-  const [movies, setMovies] = useState([]);
+  const { data, isFetching } = useGetTrendingMoviesQuery();
 
-  useEffect(() => {
-    getTrendingMovies('').then(setMovies);
-  }, []);
   return (
     <>
       <h1>Trending today</h1>
-      <MovieList movies={movies} />
+      {isFetching && <Loader />}
+      {data && <MovieList movies={data.results} />}
     </>
   );
 };

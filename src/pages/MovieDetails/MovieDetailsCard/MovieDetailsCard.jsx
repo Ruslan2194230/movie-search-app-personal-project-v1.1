@@ -1,4 +1,5 @@
-import { FilmImage } from "../MovieDetailsImage/MovieDetailsImage";
+import { DetailsCardImage } from "components/DetailsCardImage/DetailsCardImage";
+// import { FilmImage } from "../MovieDetailsImage/MovieDetailsImage";
 import {
   FilmWrapper,
   FilmTitle,
@@ -10,7 +11,11 @@ import {
 export const MovieDetailsCard = ({ movie }) => {
   return (
     <FilmWrapper>
-      <FilmImage movie={movie} />
+      {/* <FilmImage movie={movie} /> */}
+      <DetailsCardImage
+        imageDataKey={movie.poster_path}
+        imagePlaceholderkey={movie.original_title}
+      />
 
       <div>
         <FilmTitle>{movie.original_title}</FilmTitle>

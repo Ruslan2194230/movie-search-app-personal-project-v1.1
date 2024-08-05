@@ -1,6 +1,4 @@
-import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { getReviewsMovie } from "services/getMovies";
 import {
   ReviewsListItem,
   ReviewsStyledList,
@@ -8,24 +6,20 @@ import {
   ReviewsListText,
   ReviewsListSpan,
 } from "./MovieDetailsReviews.styled";
+import { useGetReviewsMovieQuery } from "store/movies/getMoviesRTK";
+import { useError } from "contexts/ErrorContext";
 
 export const Reviews = () => {
-  const { movieId } = useParams();
-  const [reviews, setReviews] = useState([]);
+  const { handleWarning } = useError();
 
-  useEffect(() => {
-    const fetchReviews = async () => {
-      try {
-        const reviewsData = await getReviewsMovie(movieId);
-        setReviews(reviewsData);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    fetchReviews();
-  }, [movieId]);
+  const { movieId } = useParams();
+  const { data, error } = useGetReviewsMovieQuery(movieId);
+  const reviews = data?.reviews ?? [];
+  if (error) {
+    handleWarning(error);
+  }
   return reviews.length === 0 ? (
-    <h3>No Reviews.!!!!!!</h3>
+    <h3>There are no reviews yet!</h3>
   ) : (
     <ReviewsStyledList>
       {reviews.map(({ id, author, content }) => (

@@ -6,12 +6,16 @@ import { ErrorProvider } from "contexts/ErrorContext";
 import { Provider } from "react-redux";
 import { persistor, store } from "store/store";
 import { PersistGate } from "redux-persist/integration/react";
+// import { PersonDetails } from "pages/PersonDetails/PersonDetails";
 
 const Home = lazy(() => import("./pages/Home/Home"));
 const MovieDetails = lazy(() => import("./pages/MovieDetails/MovieDetails"));
 const Movies = lazy(() => import("./pages/Movies/Movies"));
 
 const Favorites = lazy(() => import("./pages/Favorites/Favorites"));
+const PersonDetails = lazy(() => import("./pages/PersonDetails/PersonDetails"));
+
+window.store = store;
 
 export const App = () => (
   <ErrorProvider>
@@ -23,7 +27,10 @@ export const App = () => (
               <Route index element={<Home />} />
               <Route path="movies" element={<Movies />} />
               <Route path="favorites" element={<Favorites />} />
-              <Route path="movies/:movieId" element={<MovieDetails />}></Route>
+              <Route path="movies/:movieId" element={<MovieDetails />}>
+                {/* <Route path="person/:personId" element={<PersonDetails />} /> */}
+              </Route>
+              <Route path="person/:personId" element={<PersonDetails />} />
             </Route>
           </Routes>
         </Suspense>
