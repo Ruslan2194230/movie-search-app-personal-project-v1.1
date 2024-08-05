@@ -23,6 +23,10 @@ export const moviesApi = createApi({
       query: (movieId) =>
         `movie/${movieId}/credits?api_key=${API_KEY}&language=en-US`,
     }),
+    // getPersonDetails: builder.query({
+    //   query: (personId) =>
+    //     `person/${personId}?api_key=${API_KEY}&language=en-US`,
+    // }),
   }),
 });
 
@@ -32,4 +36,7 @@ export const {
   useGetMovieByIdQuery,
   useGetCastMovieQuery,
   useGetReviewsMovieQuery,
+  // useGetPersonDetailsQuery,
 } = moviesApi;
+
+// movie_credits

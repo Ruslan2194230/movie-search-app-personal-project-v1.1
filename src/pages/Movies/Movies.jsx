@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
+
 import { useError } from "../../contexts/ErrorContext";
 import { MovieList } from "components/MovieList/MovieList";
 import { PageNavButtonsWrapper } from "components/Buttons/PageNavButtons/PageNavButtonsWrapper";
